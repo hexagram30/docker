@@ -54,6 +54,7 @@ redis-graph-run:
 	docker run \
 		-it \
 		-p 6379:6379 \
+		-v ./data:/data \
 		--cidfile=/tmp/docker-redis-graph-container-id \
 		$(ORG)/$(PROJ):$(VERS)
 
