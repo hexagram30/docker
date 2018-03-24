@@ -1,1 +1,3 @@
 *.so
+redis-graph/builder/Dockerfile
+redis-graph/Dockerfile

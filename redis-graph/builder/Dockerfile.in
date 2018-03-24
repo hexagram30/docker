@@ -1,4 +1,4 @@
-FROM redis:4.0.8
+FROM redis:{{VERSION}}
 MAINTAINER Hexagram30 <https://github.com/hexagram30>
 
 RUN apt-get update -y
