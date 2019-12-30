@@ -1,9 +1,17 @@
 ORG=hexagram30
 
+#############################################################################
+###   Kafka   ###############################################################
+#############################################################################
+
 kafka-image: PROJ=kafka
 kafka-image: VERS=2.12-1.0.1
 kafka-image:
 	docker build -t $(ORG)/$(PROJ):$(VERS) ./kafka
+
+#############################################################################
+###   Redis Builder   #######################################################
+#############################################################################
 
 redis-builder-dockerfile: VERS=4.0.8
 redis-builder-dockerfile:
@@ -45,6 +53,10 @@ redis-builder-copy: redis-builder redis-builder-run
 	nc localhost 50999 > redis-graph/redisgraph.so
 	$(MAKE) redis-builder-stop
 
+#############################################################################
+###   Redis Graph   #########################################################
+#############################################################################
+
 redis-graph-dockerfile: VERS=4.0.8
 redis-graph-dockerfile:
 	cat ./redis-graph/Dockerfile.in | \
@@ -80,5 +92,34 @@ redis-graph-publish: PROJ=redis-graph
 redis-graph-publish: VERS=4.0.8
 redis-graph-publish:
 	docker push $(ORG)/$(PROJ):$(VERS)
+
+#############################################################################
+###   Redix   ###############################################################
+#############################################################################
+
+DOCKER_DIR = build/docker
+REDIX_VERSION = 1.10
+
+redix-image:
+	@docker build -t $(ORG)/redixdb redixdb
+	@docker tag $(ORG)/redixdb $(ORG)/redixdb:latest
+	@docker tag $(ORG)/redixdb $(ORG)/redixdb:$(REDIX_VERSION)
+
+redix-publish:
+	@docker push $(ORG)/redixdb:latest
+	@docker push $(ORG)/redixdb:$(REDIX_VERSION)
+
+redix-run:
+	@docker run -it \
+		-p 7090:7090 -p 6380:6380 \
+		-v `pwd`/data/redixdb:/data \
+		$(ORG)/redixdb:latest \
+		-engine boltdb \
+		-storage /data \
+		-verbose
+
+#############################################################################
+###   Miscellaneous   #######################################################
+#############################################################################
 
 .PHONY: redis-graph
