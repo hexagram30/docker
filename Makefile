@@ -97,7 +97,7 @@ redis-graph-publish:
 ###   Redix   ###############################################################
 #############################################################################
 
-DOCKER_DIR = build/docker
+DOCKER_DIR = docker
 REDIX_VERSION = 1.10
 
 redix-image:
@@ -117,6 +117,23 @@ redix-run:
 		-engine boltdb \
 		-storage /data \
 		-verbose
+
+#############################################################################
+###   Planet   ##############################################################
+#############################################################################
+
+PROJ = planet
+DOCKER_DIR = $(PROJ)
+PLANET_VERSION = 2018.01.31
+
+planet-image:
+	@docker build -t $(ORG)/$(PROJ) $(DOCKER_DIR)
+	@docker tag $(ORG)/$(PROJ) $(ORG)/$(PROJ):latest
+	@docker tag $(ORG)/$(PROJ) $(ORG)/$(PROJ):$(PLANET_VERSION)
+
+planet-publish:
+	@docker push $(ORG)/$(PROJ):latest
+	@docker push $(ORG)/$(PROJ):$(PLANET_VERSION)
 
 #############################################################################
 ###   Miscellaneous   #######################################################
