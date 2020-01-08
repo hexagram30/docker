@@ -1,4 +1,6 @@
 *.so
+*.DS_Store
 redis-graph/builder/Dockerfile
 redis-graph/Dockerfile
 /.idea
+example-images

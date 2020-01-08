@@ -136,7 +136,39 @@ planet-publish:
 	@docker push $(ORG)/$(PROJ):$(PLANET_VERSION)
 
 #############################################################################
+###   Noise   ###############################################################
+#############################################################################
+
+PROJ = noise
+DOCKER_DIR = $(PROJ)
+NOISE_VERSION = 0.6.0
+GUEST_BASE_DIR = /volume/noise-rs
+GUEST_BUILD_DIR = $(GUEST_BASE_DIR)/target/x86_64-unknown-linux-musl
+EXAMPLES_DIR = $(GUEST_BUILD_DIR)/debug/examples/example_images
+
+noise-image:
+	@docker build -t $(ORG)/$(PROJ) $(DOCKER_DIR)
+	@docker tag $(ORG)/$(PROJ) $(ORG)/$(PROJ):latest
+	@docker tag $(ORG)/$(PROJ) $(ORG)/$(PROJ):$(NOISE_VERSION)
+
+noise-publish:
+	@docker push $(ORG)/$(PROJ):latest
+	@docker push $(ORG)/$(PROJ):$(NOISE_VERSION)
+
+noise-shell:
+	@docker run -it \
+	--entrypoint bash \
+	-v `pwd`/example-images:$(EXAMPLES_DIR) \
+	hexagram30/noise
+
+noise:
+	@docker run \
+	-v `pwd`/example-images:$(EXAMPLES_DIR) \
+	hexagram30/noise
+	@ls -alrt `pwd`/example-images
+
+#############################################################################
 ###   Miscellaneous   #######################################################
 #############################################################################
 
-.PHONY: redis-graph
+.PHONY: redis-graph noise
