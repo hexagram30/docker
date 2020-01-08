@@ -142,9 +142,10 @@ planet-publish:
 PROJ = noise
 DOCKER_DIR = $(PROJ)
 NOISE_VERSION = 0.6.0
-GUEST_BASE_DIR = /volume/noise-rs
-GUEST_BUILD_DIR = $(GUEST_BASE_DIR)/target/x86_64-unknown-linux-musl
-EXAMPLES_DIR = $(GUEST_BUILD_DIR)/debug/examples/example_images
+GUEST_BUILDER_BASE_DIR = /volume/noise-rs
+GUEST_BUILDER_BUILD_DIR = $(GUEST_BASE_DIR)/target/x86_64-unknown-linux-musl
+EXAMPLES_DIR = example_images
+EXAMPLES_BUILDER_DIR = $(GUEST_BUILD_DIR)/debug/examples/$(EXAMPLES_DIR)
 
 noise-image:
 	@docker build -t $(ORG)/$(PROJ) $(DOCKER_DIR)
@@ -158,12 +159,12 @@ noise-publish:
 noise-shell:
 	@docker run -it \
 	--entrypoint bash \
-	-v `pwd`/example-images:$(EXAMPLES_DIR) \
-	hexagram30/noise
+	-v `pwd`/example-images:$(EXAMPLES_BUILDER_DIR) \
+	5d3e58ef9872
 
 noise:
 	@docker run \
-	-v `pwd`/example-images:$(EXAMPLES_DIR) \
+	-v `pwd`/example-images:/$(EXAMPLES_DIR) \
 	hexagram30/noise
 	@ls -alrt `pwd`/example-images
 
