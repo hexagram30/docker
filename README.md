@@ -5,30 +5,27 @@
 [![][logo]][logo-large]
 
 
-## Usage
+This repo manages the folling Docker images:
 
-
-### Kafka
-
-Create image:
-```
-$ make kafka-image
-```
-
-Run container:
-```
-docker run \
-	-p 2181:2181 \
-	-p 9092:9092 \
-	--env ADVERTISED_HOST=`docker-machine ip \`docker-machine active\`` \
-	--env ADVERTISED_PORT=9092 \
-	hexagram30/kafka:2.12-1.0.1
-```
-
+* [hexagram30/noise](https://hub.docker.com/r/hexagram30/noise)
+	```
+	$ docker run \
+		-v `pwd`/example-images:/example_images \
+		hexagram30/noise
+	```
+* [hexagram30/planet](https://hub.docker.com/r/hexagram30/planet)
+	```
+	$ docker run hexagram30/planet -?
+	$ docker run hexagram30/planet \
+  		-w 1600 -h 1200 -pm -b -E -C Altitude.col >
+		planet-001-mercator-b.bmp
+	```
+* [hexagram30/redis-graph](https://hub.docker.com/r/hexagram30/redis-graph)
+* [hexagram30/redixdb](https://hub.docker.com/r/hexagram30/redixdb)
 
 ## License
 
-Copyright © 2018, Hexagram30
+Copyright © 2018-2020, Hexagram30
 
 Apache License, Version 2.0
 

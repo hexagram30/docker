@@ -162,7 +162,7 @@ noise-shell:
 	-v `pwd`/example-images:$(EXAMPLES_BUILDER_DIR) \
 	5d3e58ef9872
 
-noise:
+noise: noise-image
 	@docker run \
 	-v `pwd`/example-images:/$(EXAMPLES_DIR) \
 	hexagram30/noise
