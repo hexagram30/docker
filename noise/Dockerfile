@@ -18,6 +18,6 @@ RUN ls -alrt /volume/noise/target/x86_64-unknown-linux-musl/release
 #############################################################################
 FROM scratch
 
-COPY --from=noise-builder /volume/noise/target/x86_64-unknown-linux-musl/release \
-    /bin
+COPY --from=noise-builder /volume/noise/target/x86_64-unknown-linux-musl/release/noise \
+    /bin/noise
 ENTRYPOINT ["/bin/noise"]
