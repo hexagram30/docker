@@ -16,6 +16,7 @@ FROM scratch
 
 COPY files/*.col /
 COPY --from=planet-builder /planet/planet /planet
+COPY --from=planet-builder /planet/Manual.txt /Manual.txt
 COPY --from=planet-builder /planet/*.col /
 
 ENTRYPOINT ["/planet"]

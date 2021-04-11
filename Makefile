@@ -122,18 +122,17 @@ redix-run:
 ###   Planet   ##############################################################
 #############################################################################
 
-PROJ = planet
-DOCKER_DIR = $(PROJ)
-PLANET_VERSION = 2018.01.31
-
 planet-image:
-	@docker build -t $(ORG)/$(PROJ) $(DOCKER_DIR)
-	@docker tag $(ORG)/$(PROJ) $(ORG)/$(PROJ):latest
-	@docker tag $(ORG)/$(PROJ) $(ORG)/$(PROJ):$(PLANET_VERSION)
+	@cd ./planet && $(MAKE) image
 
 planet-publish:
-	@docker push $(ORG)/$(PROJ):latest
-	@docker push $(ORG)/$(PROJ):$(PLANET_VERSION)
+	@cd ./planet && $(MAKE) publish
+
+planet-id:
+	@cd ./planet && $(MAKE) id
+
+planet-help:
+	@cd ./planet && $(MAKE) help
 
 #############################################################################
 ###   Noise   ###############################################################
