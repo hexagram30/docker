@@ -128,9 +128,6 @@ planet-image:
 planet-publish:
 	@cd ./planet && $(MAKE) publish
 
-planet-id:
-	@cd ./planet && $(MAKE) id
-
 planet-help:
 	@cd ./planet && $(MAKE) help
 

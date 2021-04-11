@@ -13,15 +13,5 @@ publish:
 	@docker push $(ORG)/$(PROJ):latest
 	@docker push $(ORG)/$(PROJ):$(PLANET_VERSION)
 
-
-id:
-	@docker image ls $(ORG)/$(PROJ):latest | tail -1 | awk '{print $$3}'
-
-
-$(OUT_DIR)/Manual.txt:
-	@mkdir -p $(OUT_DIR)
-	export ID=$(shell $(MAKE) id); docker cp $$ID:/Manual.txt $(OUT_DIR)/Manual.txt
-
-help: $(OUT_DIR)/Manual.txt
-	cat $(OUT_DIR)/Manual.txt
-
+help:
+	@docker run -t --entrypoint=/cat $(ORG)/$(PROJ):latest /Manual.txt|more
