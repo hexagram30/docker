@@ -23,6 +23,7 @@ RUN go build -o /bin/gocat /cat.go
 FROM scratch
 
 COPY files/*.col /
+COPY files/Example.txt /
 COPY --from=planet-builder /planet/planet /planet
 COPY --from=planet-builder /planet/Manual.txt /Manual.txt
 COPY --from=planet-builder /planet/*.col /

@@ -15,3 +15,6 @@ publish:
 
 help:
 	@docker run -t --entrypoint=/cat $(ORG)/$(PROJ):latest /Manual.txt|more
+
+usage:
+	@docker run -t --entrypoint=/cat $(ORG)/$(PROJ):latest /Example.txt

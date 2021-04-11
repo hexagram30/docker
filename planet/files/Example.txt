@@ -1,0 +1,23 @@
+
+Usage examples:
+
+docker run hexagram30/planet \
+       -s 0.42 -i 0.008 -n -w 4000 -h 2544 -pp -S -C Olsson2.col > \
+       planet-42-peters-alt.bmp
+
+docker run hexagram30/planet \
+       -s 0.42 -i 0.008 -n -w 4000 -h 2544 -pp -S -C greyscale.col > \
+       planet-42-peters-grey.bmp
+
+docker run hexagram30/planet \
+       -s 0.42 -i 0.008 -n -w 4000 -h 2544 -pp -S -E -C white.col > \
+       planet-42-peters-outline.bmp
+
+docker run hexagram30/planet \
+       -s 0.42 -i 0.008 -n -w 4000 -h 2544 -pp -S -C mars.col > \
+       planet-42-peters-brown.bmp
+
+docker run hexagram30/planet \
+       -s 0.42 -i 0.008 -n -w 4000 -h 2544 -pp -S -C burrows.col > \
+       planet-42-peters-green.bmp
+
